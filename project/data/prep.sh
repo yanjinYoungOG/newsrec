@@ -11,7 +11,7 @@ wget "https://mind201910small.blob.core.windows.net/release/MINDsmall_train.zip"
 unzip temp.zip -d MIND/train
 rm temp.zip
 
-# download test data
+# download test dataM
 wget "https://mind201910small.blob.core.windows.net/release/MINDsmall_dev.zip" -O temp.zip
 unzip temp.zip -d MIND/test
 rm temp.zip
