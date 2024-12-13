@@ -9,7 +9,7 @@ import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint, EarlyStopping
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_lightning import Trainer
-from pytorch_lightning.plugins import DDPPlugin
+from pytorch_lightning.strategies import DDPStrategy
 from models.lstur import LSTUR
 from models.nrms import NRMS
 from models.naml import NAML
@@ -119,7 +119,7 @@ def cli_main():
             **config.trainer,
             callbacks=[early_stop_callback, checkpoint_callback],
             logger=logger,
-            plugins=DDPPlugin(find_unused_parameters=config.find_unused_parameters), 
+            strategy=DDPStrategy(find_unused_parameters=config.find_unused_parameters), 
             resume_from_checkpoint=args.resume
         )
     else:
@@ -127,7 +127,7 @@ def cli_main():
             **config.trainer,
             callbacks=[early_stop_callback, checkpoint_callback],
             logger=logger,
-            plugins=DDPPlugin(find_unused_parameters=config.find_unused_parameters)
+            strategy=DDPStrategy(find_unused_parameters=config.find_unused_parameters)
         )
     trainer.fit(
         model=model, 
